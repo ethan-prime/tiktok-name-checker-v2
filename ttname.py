@@ -26,9 +26,8 @@ names = []
 with open('usernames.txt') as f:
     names = f.readlines()
 
-for name in names:
-    name = name.replace('\n', '')
-    print(name)
+for i in range(len(names)):
+    names[i] = names[i].replace('\n', '') 
 
 if len(names) == 0:
     if input('Generate random names [Y/N]: ') == 'Y':
@@ -64,4 +63,9 @@ for name in names:
         print(f'[AVAILABLE] {name} [{n}/{len(names)}]')
         results.append(name)
 
+with open('usernames.txt', 'w') as f:
+    for name in results:
+        f.write(f'{name}\n')
+
+print('RESULTS PRINTED IN usernames.txt')
 print(f'ALL NAMES FOUND: {results}')

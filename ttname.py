@@ -23,19 +23,27 @@ def cycle_cookies():
     return use
 
 names = []
-if input('Generate random names [Y/N]: ') == 'Y':
-    number = int(input('How many names: '))
-    length = int(input('How long each name should be: '))
-    use_only_letters = bool(input('Use only letters [Y/N]: '))
-    if use_only_letters == 'Y':
-        char_set = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    else:
-        char_set = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-    for i in range(number):
-        new_name = []
-        for x in range(length):
-            new_name.append(random.choice(char_set))
-        names.append(''.join(new_name))
+with open('usernames.txt') as f:
+    names = f.readlines()
+
+for name in names:
+    name = name.replace('\n', '')
+    print(name)
+
+if len(names) == 0:
+    if input('Generate random names [Y/N]: ') == 'Y':
+        number = int(input('How many names: '))
+        length = int(input('How long each name should be: '))
+        use_only_letters = bool(input('Use only letters [Y/N]: '))
+        if use_only_letters == 'Y':
+            char_set = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        else:
+            char_set = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+        for i in range(number):
+            new_name = []
+            for x in range(length):
+                new_name.append(random.choice(char_set))
+            names.append(''.join(new_name))
 
 if len(names) == 0:
     names = (input('Input names to be checked: ')).split(' ')
